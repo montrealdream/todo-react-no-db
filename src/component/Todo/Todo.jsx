@@ -1,3 +1,31 @@
+const TodoData = [
+    {
+      id: 1,
+      content: "Công việc 1",
+      status: "initial",
+    },
+    {
+      id: 2,
+      content: "Công việc 2",
+      status: "initial",
+    },
+    {
+      id: 3,
+      content: "Công việc 3",
+      status: "doing",
+    },
+    {
+      id: 4,
+      content: "Công việc 4",
+      status: "completed",
+    },
+    {
+      id: 5,
+      content: "Công việc 5",
+      status: "rejected",
+    },
+];
+
 export const Todo = () => {
     return (
         <>
@@ -8,21 +36,13 @@ export const Todo = () => {
                 </form>
         
                 <div className="todo__list">
-                    <div className={`todo__item todo__item--initial`}>
-                        Công việc 1
-                    </div>
-                    <div className={`todo__item todo__item--initial`}>
-                        Công việc 2
-                    </div>
-                    <div className={`todo__item todo__item--doing`}>
-                        Công việc 3
-                    </div>
-                    <div className={`todo__item todo__item--completed`}>
-                        Công việc 4
-                    </div>
-                    <div className={`todo__item todo__item--rejected`}>
-                        Công việc 5
-                    </div>
+                    {
+                        TodoData.map(item => 
+                            <div className={`todo__item todo__item--${item.status}`}>
+                                {item.content}
+                            </div>
+                        )   
+                    }
                 </div>
             </div>
         </>
