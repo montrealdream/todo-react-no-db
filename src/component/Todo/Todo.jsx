@@ -60,6 +60,19 @@ export const Todo = () => {
         setTodo(newTodo);
     }
 
+    // thay đổi trạng thái công việc
+    const handleChangeStatusTodo = (event, todoID) => {
+        const status = event.target.value;
+
+        const newTodo = todo.map(item => {
+            if(item.id === todoID) item.status = status;
+            return item;
+        });
+
+        setTodo(newTodo);
+
+    }
+
     return (
         <>
             <div className="todo">
@@ -81,11 +94,20 @@ export const Todo = () => {
                                 <span>
                                     {item.content}
                                 </span>
-                                <button
-                                    onClick={() => handleDeleteTodo(item.id)}
-                                >
-                                    xóa
-                                </button>
+                                
+                                <span>
+                                    <select 
+                                        defaultValue={item.status}
+                                        onChange={(event) => handleChangeStatusTodo(event, item.id)}
+                                    >
+                                    <option value={"initial"}>Khởi tạo</option>
+                                    <option value={"doing"}>Đang làm</option>
+                                    <option value={"completed"}>Hoàn thành</option>
+                                    <option value={"rejected"}>Không hoàn thành</option>
+                                    </select>
+
+                                    <button onClick={() => handleDeleteTodo(item.id)}>Xóa</button>
+                                </span>
                             </div>
                         )   
                     }

@@ -74,5 +74,6 @@
 }
 
 .todo__list button {
+  margin-left: 10px;
   cursor: pointer;
 }
