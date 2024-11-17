@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 const TodoData = [
     {
       id: 1,
@@ -27,18 +29,49 @@ const TodoData = [
 ];
 
 export const Todo = () => {
+    const [todo, setTodo] = useState(TodoData); // sử dụng useState
+
+    // tạo mới công việc (lưu ý không có database nên khi thoát dự án vào lại cũng y chang cái mảng có sẵn)
+    const handleCreateTodo = (event) => {
+        event.preventDefault(); // ngăn chặn submit form
+
+        const content = event.target.content.value;
+
+        // thêm mới công việc vào mảng
+        if(content) {
+            setTodo([
+                ...todo, // spread syntax
+                {
+                    id: Date.now(),
+                    content: content,
+                    status: 'initial'
+                }
+            ]);
+
+            console.log(todo);
+        }
+        // xóa nội dung đã điền trong thẻ input
+        event.target.content.value = "";
+    }
+
     return (
         <>
             <div className="todo">
-                <form className="todo__create">
+                <form 
+                    className="todo__create"
+                    onSubmit={handleCreateTodo}
+                >
                     <input name="content" placeholder="Nhập nội dung..." />
                     <button>Tạo</button>
                 </form>
         
                 <div className="todo__list">
                     {
-                        TodoData.map(item => 
-                            <div className={`todo__item todo__item--${item.status}`}>
+                        todo.map(item => 
+                            <div 
+                                key={item.id}
+                                className={`todo__item todo__item--${item.status}`}
+                            >
                                 {item.content}
                             </div>
                         )   
