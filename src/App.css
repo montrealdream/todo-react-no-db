@@ -72,3 +72,7 @@
 .todo__item--rejected {
   background-color: #e38c8c;
 }
+
+.todo__list button {
+  cursor: pointer;
+}

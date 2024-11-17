@@ -54,6 +54,12 @@ export const Todo = () => {
         event.target.content.value = "";
     }
 
+    // xóa công việc
+    const handleDeleteTodo = (todoID) => {
+        const newTodo = todo.filter(item => item.id !== todoID);
+        setTodo(newTodo);
+    }
+
     return (
         <>
             <div className="todo">
@@ -64,7 +70,7 @@ export const Todo = () => {
                     <input name="content" placeholder="Nhập nội dung..." />
                     <button>Tạo</button>
                 </form>
-        
+
                 <div className="todo__list">
                     {
                         todo.map(item => 
@@ -72,7 +78,14 @@ export const Todo = () => {
                                 key={item.id}
                                 className={`todo__item todo__item--${item.status}`}
                             >
-                                {item.content}
+                                <span>
+                                    {item.content}
+                                </span>
+                                <button
+                                    onClick={() => handleDeleteTodo(item.id)}
+                                >
+                                    xóa
+                                </button>
                             </div>
                         )   
                     }
